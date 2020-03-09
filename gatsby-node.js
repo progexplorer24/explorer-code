@@ -42,8 +42,8 @@ exports.createPages = ({ actions, graphql }) => {
 
     // create page for each mdx file
     posts.forEach((post, index) => {
-      const previous = index === posts.length - 1 ? null : posts[index + 1]
-      const next = index === 0 ? null : posts[index - 1]
+      const previous = index === posts.length - 1 ? undefined : posts[index + 1]
+      const next = index === 0 ? undefined : posts[index - 1]
 
       createPage({
         path: post.fields.slug,
