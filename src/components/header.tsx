@@ -9,10 +9,6 @@ type Header = {
   siteDescription?: string
 }
 
-// const StyledHeader = tw.button`
-// bg-purple-800 mb-8 w-full
-// `
-
 export const Header: React.FC<Header> = ({
   siteTitle = "",
   siteDescription = "",
