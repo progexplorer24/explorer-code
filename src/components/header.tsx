@@ -6,7 +6,7 @@ import { css } from "@emotion/core"
 
 type Header = {
   siteTitle: string
-  siteDescription: string
+  siteDescription?: string
 }
 
 // const StyledHeader = tw.button`
