@@ -10,6 +10,7 @@ type LayoutProps = {
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const { title, description } = useSiteMetadata()
+  console.log(title, description)
   return (
     <main>
       <Header siteTitle={title} siteDescription={description} />
