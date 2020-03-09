@@ -1,6 +1,6 @@
-import { graphql } from "gatsby"
-import { MDXRenderer } from "gatsby-plugin-mdx"
 import React from "react"
+import { MDXRenderer } from "gatsby-plugin-mdx"
+import { graphql, Link } from "gatsby"
 
 type BlogPostProps = {
   data: {
@@ -19,13 +19,53 @@ type BlogPostProps = {
       }
     }
   }
+
+  pageContext: {
+    previous?: {
+      fields: {
+        slug: string
+      }
+      frontmatter: {
+        title: string
+      }
+    }
+    next?: {
+      fields: {
+        slug: string
+      }
+      frontmatter: {
+        title: string
+      }
+    }
+  }
 }
 
-const BlogPost: React.FC<BlogPostProps> = ({ data }) => {
-  const { body } = data.mdx
-  console.log(data.mdx)
+const BlogPost: React.FC<BlogPostProps> = ({ data, pageContext }) => {
+  const { frontmatter, body, fields, excerpt } = data.mdx
+  const { title, date, cover } = frontmatter
+  const { previous, next } = pageContext
 
-  return <MDXRenderer>{body}</MDXRenderer>
+  return (
+    <>
+      <h1>{title}</h1>
+      <p>{date}</p>
+      <MDXRenderer>{body}</MDXRenderer>
+      {typeof previous === "undefined" ? null : (
+        <>
+          <Link to={previous.fields.slug}>
+            <p>{previous.frontmatter.title}</p>
+          </Link>
+        </>
+      )}
+      {typeof next === "undefined" ? null : (
+        <>
+          <Link to={next.fields.slug}>
+            <p>{next.frontmatter.title}</p>
+          </Link>
+        </>
+      )}
+    </>
+  )
 }
 
 export const query = graphql`
@@ -38,6 +78,15 @@ export const query = graphql`
       }
       frontmatter {
         title
+        date(formatString: "YYYY MMMM Do")
+        cover {
+          publicURL
+          childImageSharp {
+            sizes(maxWidth: 2000, traceSVG: { color: "#639" }) {
+              ...GatsbyImageSharpSizes_tracedSVG
+            }
+          }
+        }
       }
     }
   }
