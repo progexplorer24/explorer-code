@@ -6,11 +6,10 @@
  */
 
 import React, { ReactNode } from "react"
-import PropTypes from "prop-types"
+
 import { useStaticQuery, graphql } from "gatsby"
 
 import { Header } from "./header"
-import "./layout.css"
 
 type Layout = {
   children: ReactNode
