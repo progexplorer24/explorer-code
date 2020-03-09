@@ -1,43 +1,36 @@
-import { Link } from "gatsby"
 import React from "react"
+import { Link } from "gatsby"
 
 import tw from "tailwind.macro"
 import { css } from "@emotion/core"
 
 type Header = {
   siteTitle: string
+  siteDescription: string
 }
 
 // const StyledHeader = tw.button`
 // bg-purple-800 mb-8 w-full
 // `
 
-const Header: React.FC<Header> = ({ siteTitle = "" }: Header) => (
+export const Header: React.FC<Header> = ({
+  siteTitle = "",
+  siteDescription = "",
+}: Header) => (
   <header
     css={css`
-      ${tw`bg-purple-800 mb-8 w-full`}
+      ${tw`w-full mb-8 bg-purple-800`}
     `}
   >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
-    </div>
+    <Link to="/">
+      <div
+        css={css`
+          ${tw`text-4xl text-white`}
+        `}
+      >
+        {siteTitle}
+      </div>
+      <p>{siteDescription}</p>
+    </Link>
   </header>
 )
-
-export default Header
