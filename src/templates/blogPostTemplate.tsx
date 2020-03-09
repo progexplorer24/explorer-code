@@ -1,6 +1,7 @@
 import React from "react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import { graphql, Link } from "gatsby"
+import { Layout } from "../components/layout/layout"
 
 type BlogPostProps = {
   data: {
@@ -46,7 +47,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ data, pageContext }) => {
   const { previous, next } = pageContext
 
   return (
-    <>
+    <Layout>
       <h1>{title}</h1>
       <p>{date}</p>
       <MDXRenderer>{body}</MDXRenderer>
@@ -64,7 +65,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ data, pageContext }) => {
           </Link>
         </>
       )}
-    </>
+    </Layout>
   )
 }
 
